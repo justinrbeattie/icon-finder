@@ -1,0 +1,364 @@
+@font-face {
+    font-family: 'icons_drinks_line';
+    src: url('./assets/icons/icons_drinks_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_travel_filled';
+    src: url('./assets/icons/icons_travel_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_photo_and_video_line';
+    src: url('./assets/icons/icons_photo_and_video_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_household_2_line';
+    src: url('./assets/icons/icons_household_2_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_city_line';
+    src: url('./assets/icons/icons_city_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_travel_line';
+    src: url('./assets/icons/icons_travel_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_editing_filled';
+    src: url('./assets/icons/icons_editing_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_user_interface_2_filled';
+    src: url('./assets/icons/icons_user_interface_2_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_household_1_line';
+    src: url('./assets/icons/icons_household_1_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_arrows_line';
+    src: url('./assets/icons/icons_arrows_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_mobile_filled';
+    src: url('./assets/icons/icons_mobile_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_food_line';
+    src: url('./assets/icons/icons_food_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_profile_filled';
+    src: url('./assets/icons/icons_profile_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_media_line';
+    src: url('./assets/icons/icons_media_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_user_interface_1_filled';
+    src: url('./assets/icons/icons_user_interface_1_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_household_1_filled';
+    src: url('./assets/icons/icons_household_1_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_media_filled';
+    src: url('./assets/icons/icons_media_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_messaging_filled';
+    src: url('./assets/icons/icons_messaging_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_weather_line';
+    src: url('./assets/icons/icons_weather_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_profile_line';
+    src: url('./assets/icons/icons_profile_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_ecommerce_filled';
+    src: url('./assets/icons/icons_ecommerce_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_music_line';
+    src: url('./assets/icons/icons_music_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_messaging_line';
+    src: url('./assets/icons/icons_messaging_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_files_line';
+    src: url('./assets/icons/icons_files_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_user_interface_2_line';
+    src: url('./assets/icons/icons_user_interface_2_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_maps_filled';
+    src: url('./assets/icons/icons_maps_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_arrows_filled';
+    src: url('./assets/icons/icons_arrows_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_maps_line';
+    src: url('./assets/icons/icons_maps_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_household_2_filled';
+    src: url('./assets/icons/icons_household_2_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_hands_filled';
+    src: url('./assets/icons/icons_hands_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_mobile_line';
+    src: url('./assets/icons/icons_mobile_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_city_filled';
+    src: url('./assets/icons/icons_city_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_security_line';
+    src: url('./assets/icons/icons_security_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_drinks_filled';
+    src: url('./assets/icons/icons_drinks_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_files_filled';
+    src: url('./assets/icons/icons_files_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_music_filled';
+    src: url('./assets/icons/icons_music_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_food_filled';
+    src: url('./assets/icons/icons_food_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_network_line';
+    src: url('./assets/icons/icons_network_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_computer_hardware_filled';
+    src: url('./assets/icons/icons_computer_hardware_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_hands_line';
+    src: url('./assets/icons/icons_hands_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_security_filled';
+    src: url('./assets/icons/icons_security_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_people_filled';
+    src: url('./assets/icons/icons_people_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_people_line';
+    src: url('./assets/icons/icons_people_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_ecommerce_line';
+    src: url('./assets/icons/icons_ecommerce_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_network_filled';
+    src: url('./assets/icons/icons_network_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_weather_filled';
+    src: url('./assets/icons/icons_weather_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_editing_line';
+    src: url('./assets/icons/icons_editing_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_photo_and_video_filled';
+    src: url('./assets/icons/icons_photo_and_video_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_time_date_filled';
+    src: url('./assets/icons/icons_time_date_filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_computer_hardware_line';
+    src: url('./assets/icons/icons_computer_hardware_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_user_interface_1_line';
+    src: url('./assets/icons/icons_user_interface_1_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icons_time_date_line';
+    src: url('./assets/icons/icons_time_date_line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

@@ -1,0 +1,96 @@
+<h2>Templates</h2>
+<div class="horizontal-viewport">
+  <div *ngFor="let template of htmlTemplates; let i = index;" class="template" (click)="openDialog(i)">
+    <h3>{{template.name}}</h3>
+
+    <span [style]="'--icon-font-size:' + template.icon.size + 'pt;' + '--label-font-size:' + template.label.size + 'pt;'">
+
+      <ng-template #icon>
+        <FONT [attr.size]="template.icon.size" [attr.color]="template.icon.color" [attr.face]="template.icon.font">
+          <ng-container [ngSwitch]="template.label.position">
+            <P *ngSwitchCase="'top' || 'bottom'" [attr.align]="template.icon.alignment"
+              [innerHTML]="template.icon.content"></P>
+            <span *ngSwitchCase="'left' || 'right'" [attr.align]="template.icon.alignment"
+              [innerHTML]="template.icon.content"></span>
+          </ng-container>
+        </FONT>
+      </ng-template>
+
+      <ng-template #label>
+        <FONT [attr.size]="template.label.size" [attr.color]="template.label.color" [attr.face]="template.label.font">
+
+          <ng-template #labelContent>
+            <ng-container [ngSwitch]="template.label.weight">
+              <b *ngSwitchCase="'bold'" [innerHTML]="template.label.content"></b>
+              <span *ngSwitchDefault [innerHTML]="template.label.content"></span>
+            </ng-container>
+          </ng-template>
+
+          <ng-container [ngSwitch]="template.label.position">
+            <P *ngSwitchCase="'top' || 'bottom'" [attr.align]="template.label.alignment">
+              <ng-container *ngTemplateOutlet="labelContent"></ng-container>
+            </P>
+            <span *ngSwitchCase="'left' || 'right'" [attr.align]="template.label.alignment">
+              <ng-container *ngTemplateOutlet="labelContent"></ng-container>
+            </span>
+          </ng-container>
+        </FONT>
+      </ng-template>
+
+      <ng-container [ngSwitch]="template.label.position">
+        <ng-container *ngSwitchCase="'top' || 'left'">
+          <ng-container *ngTemplateOutlet="label"></ng-container>
+          <ng-container *ngTemplateOutlet="icon"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="icon"></ng-container>
+          <ng-container *ngTemplateOutlet="label"></ng-container>
+        </ng-container>
+      </ng-container>
+
+    </span>
+
+
+  </div>
+</div>
+
+
+
+<ng-template #dialogRef>
+  <h2 mat-dialog-title>Customise Template</h2>
+  <mat-dialog-content class="mat-typography">
+    <grid [cols]="3" [colTemplate]="'1fr'">
+      <cell>
+        <label>Font Size</label>
+        <mat-slider [max]="200" [min]="5" [thumbLabel]="true" [(ngModel)]="currentTemplate.icon.size"
+          (change)="setHTML()">
+        </mat-slider>
+      </cell>
+      <cell>
+        <mat-menu #appMenu="matMenu">
+          <button (click)="currentTemplate.icon.color = 'red'" mat-menu-item>Red</button>
+          <button (click)="currentTemplate.icon.color = 'blue'" mat-menu-item>Blue</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="appMenu">
+          Color
+        </button>
+
+      </cell>
+      <cell>
+        <mat-button-toggle-group name="alignment" aria-label="Alignment" [(ngModel)]="currentTemplate.icon.alignment"
+          (change)="setHTML()">
+          <mat-button-toggle value="left">Left</mat-button-toggle>
+          <mat-button-toggle value="center">Center</mat-button-toggle>
+          <mat-button-toggle value="right">Right</mat-button-toggle>
+        </mat-button-toggle-group>
+      </cell>
+    </grid>
+
+    <div [innerHTML]="currentTemplate.html"></div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  </mat-dialog-actions>
+</ng-template>
