@@ -1,0 +1,36 @@
+:host {
+  grid {
+    width: 100%;
+    padding: 0;
+  }
+
+  mat-dialog-content {
+    max-height: calc(80vh - 140px);
+    height: 100%;
+  }
+
+  mat-dialog-content app-html-template {
+    height: calc(100% - 256px);
+    min-height: calc(100% - 256px);
+  }
+
+  mat-form-field{
+    width: 100%;
+    padding-left:var(--gap);
+    padding-right:var(--gap);
+    margin-bottom: -4px;
+  }
+
+  mat-form-field mat-slider {
+    width: calc(100% + calc(var(--gap) * 2));
+    position: absolute;
+    left: calc(var(--gap) * -1);
+    top: calc(var(--gap) - 1px);
+    z-index: 1;
+  }
+
+  mat-button-toggle-group {
+    --toggle-group-height: 22px;
+    border: solid 2px rgba(255, 255, 255, 0.12) !important;
+  }
+}

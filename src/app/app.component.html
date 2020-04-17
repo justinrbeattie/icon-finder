@@ -1,8 +1,10 @@
 <mat-toolbar>
   <span>Icon Finder</span>
-
-  <input placeholder="Placeholder" [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()"
-    (keydown)="clearTimeout()">
+    <mat-form-field floatLabel="never" appearance="standard">
+        <input matInput [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()"
+        (keydown)="clearTimeout()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
 </mat-toolbar>
 
 <grid cols="1">

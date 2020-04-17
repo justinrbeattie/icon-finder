@@ -21,7 +21,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.addResponsiveClasses();
-    this.iconFonts[0].icons[0].selected = true;
+    this.selectIcon(0, 0);
   }
 
   addResponsiveClasses() {

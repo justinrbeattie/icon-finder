@@ -1,6 +1,18 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { EditTemplateDialogComponent } from './edit-template-dialog/edit-template-dialog.component';
+
+export interface DialogData {
+  currentTemplate: HtmlTemplate;
+}
+
+export interface HtmlTemplate {
+  name: string,
+  icon: { font: string, content: string, size: string, color: string, alignment: string },
+  label: { font: string, content: string, size: string, color: string, weight: string, alignment: string, position: string },
+  html: SafeHtml,
+}
 
 @Component({
   selector: 'app-html-templates',
@@ -10,111 +22,96 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class HtmlTemplatesComponent implements OnInit, OnChanges {
   @Input() font: string;
   @Input() iconContent: string;
-  @ViewChild("dialogRef") dialogRef: TemplateRef<any>;
-  currentTemplate = {
-    name: '',
-    icon: { font: '', content: '', size: '', color: '', alignment: '' },
-    label: { font: 'Inter', content: '', size: '', color: '', weight: '', alignment: '', position: '' },
-    html: null,
-  }
-  htmlTemplates = [
+  selectedFile;
+  htmlTemplates: Array<HtmlTemplate>;
 
-    {
-      name: 'Character Only',
-      icon: { font: '', content: '', size: '96', color: 'red', alignment: 'center' },
-      label: { font: 'Inter', content: 'Label', size: '28', color: 'green', weight: 'bold', alignment: 'center', position: 'top' },
-      html: null,
-    }
-
-
-
-  ]
-
-
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.setFont();
+    if (localStorage.getItem("htmlTemplates") != undefined) {
+      this.htmlTemplates = JSON.parse(localStorage.getItem("htmlTemplates"));
+    } else {
+      this.htmlTemplates = [
+        {
+          name: 'Example Template',
+          icon: { font: '', content: '', size: '96', color: 'red', alignment: 'center' },
+          label: { font: 'Inter', content: 'Label', size: '28', color: 'green', weight: 'bold', alignment: 'center', position: 'top' },
+          html: null,
+        }
+      ]
+    }
+    this.setIcon();
   }
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    this.setFont();
+    this.setIcon();
   }
 
-  setFont() {
-    this.htmlTemplates.map(template => {
-      template.icon.font = this.font;
-      template.icon.content = this.iconContent;
-    });
-    this.setHTML();
-  }
-
-
-  setHTML() {
-
-    this.htmlTemplates.map(template => {
-      const title = `<h3>${template.name}</h3>`;
-      let htmlString = '';
-      let label = '';
-      const icon = `
-      <span style="--font-size:${template.icon.size}pt; ">
-      <FONT size="${template.icon.size}" 
-            color="${template.icon.color}" 
-            face="${template.icon.font}">
-        <P align="${template.icon.alignment}">${template.icon.content}</P>
-      </FONT>
-      </span>
-      `
-      if (template.label) {
-        label = `
-        <span style="--font-size:${template.label.size}pt; ">
-        <FONT size="${template.label.size}" 
-              color="${template.label.color}" 
-              face="${template.label.font}">
-              <P align="${template.label.alignment}">
-              ${template.label.weight == 'bold' ? '<B>' : ''} 
-              ${template.label.content}
-              ${template.label.weight == 'bold' ? '</B>' : ''}
-              </P>
-        </FONT>
-        </span>
-        `
-      }
-
-      const position = template.label.position;
-      switch (position) {
-        case 'top':
-          htmlString = label + icon;
-          break;
-        case 'left':
-          htmlString = label + icon;
-          htmlString.replace(/<P/g, "<span");
-          htmlString.replace(/P>/g, "span>");
-          break;
-        case 'bottom':
-          htmlString = icon + label;
-          break;
-        case 'right':
-          htmlString = icon + label;
-          htmlString.replace(/<P/g, "<span");
-          htmlString.replace(/P>/g, "span>");
-          break;
-        default:
-          htmlString = icon + label;
-      }
-
-      template.html = this.sanitizer.bypassSecurityTrustHtml(title + htmlString);
-
-    });
+  setIcon() {
+    if (this.htmlTemplates) {
+      this.htmlTemplates.map(template => {
+        template.icon.font = this.font;
+        template.icon.content = this.iconContent;
+      });
+    }
   }
 
   openDialog(i): void {
-    this.currentTemplate = this.htmlTemplates[i];
-    this.dialog.open(this.dialogRef, {
+
+    const currentTemplate: HtmlTemplate = {
+      name: this.htmlTemplates[i].name,
+      icon: Object.assign({}, this.htmlTemplates[i].icon),
+      label: Object.assign({}, this.htmlTemplates[i].label),
+      html: this.htmlTemplates[i].html,
+    }
+
+    const dialogRef = this.dialog.open(EditTemplateDialogComponent, {
       height: '80vh',
       width: '80vw',
+      data: { currentTemplate: currentTemplate }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.htmlTemplates[i] = result.currentTemplate;
+        localStorage.setItem("htmlTemplates", JSON.stringify(this.htmlTemplates));
+      }
     });
   }
 
+  download(blob, filename) {
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+      window.navigator.msSaveOrOpenBlob(blob, filename);
+    else { // Others
+      var a = document.createElement("a"),
+        url = URL.createObjectURL(blob);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
+  }
 
+  exportJson(): void {
+    const c = JSON.stringify(this.htmlTemplates);
+    const file = new Blob([c], { type: 'text/json' });
+    this.download(file, "templates.json");
+  }
+
+  uploadFile(event) {
+    this.selectedFile = event.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsText(this.selectedFile, "UTF-8");
+    fileReader.onload = () => {
+      const result: any = fileReader.result;
+      this.htmlTemplates = JSON.parse(result);
+    }
+    fileReader.onerror = (error) => {
+      console.log(error);
+    }
+  }
 }

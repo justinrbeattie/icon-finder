@@ -51,6 +51,15 @@ body {
   }
 
 
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 2px;
+}
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: var(--toggle-group-height,22px);
+}
+
+
 }
 
 

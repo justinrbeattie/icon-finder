@@ -26,15 +26,6 @@
         color: rgba(0, 0, 0, 0.8);
       }
 
-      font > * {
-        font-size: var(--label-font-size);
-        line-height: var(--label-font-size);
-      }
-
-      font[face*="icons"] > * {
-        font-size: var(--icon-font-size);
-        line-height: var(--icon-font-size);
-      }
 
     }
   }
