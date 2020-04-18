@@ -40,7 +40,7 @@
       </ng-container>
     </FONT>
   </ng-template>
-  <p [attr.align]="template.icon.alignment">
+  <p #generatedHtml [attr.align]="template.icon.alignment">
     <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'left'">
       <ng-container *ngTemplateOutlet="label"></ng-container>
       <ng-container *ngTemplateOutlet="icon"></ng-container>

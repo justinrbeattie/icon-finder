@@ -3,19 +3,33 @@
     <h2>Templates</h2>
   </cell>
   <cell content-alignment="center middle">
-    <button mat-button color="primary" class="mr-100" (click)="exportJson()">Export</button>
-    <button mat-button color="primary" class="mr-100" (click)="uploader.click()">Import</button>
-    <button mat-button color="danger" class="mr-100">Remove</button>
-    <button mat-button color="danger">Add</button>
-    <input hidden type="file" #uploader (change)="uploadFile($event)" />
+    <button mat-button color="primary" class="mr-100" (click)="export()"
+      [disabled]="removeTemplatesMode">Export</button>
+    <button mat-button color="primary" class="mr-100" (click)="uploader.click()"
+      [disabled]="removeTemplatesMode">Import</button>
+    <button *ngIf="!removeTemplatesMode" mat-button color="warn" class="mr-100"
+      (click)="removeTemplatesMode = !removeTemplatesMode">Remove</button>
+    <button *ngIf="removeTemplatesMode" mat-raised-button color="warn" class="mr-100"
+      (click)="removeTemplatesMode = !removeTemplatesMode">Remove</button>
+    <button mat-raised-button color="primary" (click)="addTemplate()" [disabled]="removeTemplatesMode">Add</button>
+    <input hidden type="file" #uploader (change)="import($event)" accept="application/JSON" />
   </cell>
 </grid>
 
 <div class="horizontal-viewport">
-  <div *ngFor="let template of htmlTemplates; let i = index;" class="template" (click)="openDialog(i)">
-    <h3>{{template.name}}</h3>
-
-    <app-html-template content-alignment="center middle" [template]="template"></app-html-template>
-
+  <div *ngFor="let template of storedData.htmlTemplates; let i = index;" class="template">
+    <div class="template-heading" content-alignment="space-between midddle">
+      <h3>{{template.name}} </h3>
+      <div class="template-actions">
+        <button mat-icon-button (click)="editTemplate(i)" [disabled]="removeTemplatesMode">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="copyTemplateHtml(htmlTemplateComponent,i)" [disabled]="removeTemplatesMode">
+          <mat-icon>copy</mat-icon>
+        </button>
+      </div>
+    </div>
+    <app-html-template #htmlTemplateComponent content-alignment="center middle" [template]="template"></app-html-template>
+    <mat-icon (click)="removeTemplate(i)" *ngIf="removeTemplatesMode" class="remove" color="warn">cancel</mat-icon>
   </div>
 </div>

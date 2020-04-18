@@ -2,6 +2,7 @@ import { Component, Renderer2, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import *  as  IconFonts from '../assets/json/iconFonts.json';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,18 +11,13 @@ import *  as  IconFonts from '../assets/json/iconFonts.json';
 export class AppComponent {
   title: string = 'Icon Finder';
   breakpoints: Array<string>;
-  iconFonts = IconFonts['default'];
-  searchTerm: string;
-  browse: boolean = true;
-  isTyping;
-  font:string;
-  iconContent:string;
+  iconFonts= IconFonts['default']
+
 
   constructor(private breakpointObserver: BreakpointObserver, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.addResponsiveClasses();
-    this.selectIcon(0, 0);
   }
 
   addResponsiveClasses() {
@@ -66,38 +62,4 @@ export class AppComponent {
     return breakpoint;
   }
 
-  onSearch() {
-    window.clearTimeout(this.isTyping);
-
-    this.isTyping = setTimeout(() => {
-      if (this.searchTerm.length > 0) {
-        this.browse = false;
-        this.iconFonts.forEach((font, fontIndex) => {
-          const filteredIcons = font.icons.filter(icon => {
-            return icon.name.includes(this.searchTerm);
-          });
-          font['filteredIcons'] = Array.from(filteredIcons);
-        });
-
-      } else {
-        this.browse = true;
-        this.iconFonts.forEach((font, fontIndex) => {
-          font['filteredIcons'] = font.icons;
-        });
-      }
-    }, 250);
-  }
-
-  clearTimeout() {
-    window.clearTimeout(this.isTyping);
-  }
-
-  selectIcon(fontIndex: number, iconIndex: number) {
-    this.iconFonts.forEach(font => { font.filteredIcons.map(icon => icon.selected = false) });
-    this.iconFonts[fontIndex].filteredIcons[iconIndex].selected = true;
-
-    this.font = this.iconFonts[fontIndex].name;
-    this.iconContent = this.iconFonts[fontIndex].filteredIcons[iconIndex].unicode;
-
-  }
 }

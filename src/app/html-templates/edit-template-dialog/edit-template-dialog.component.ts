@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HtmlTemplatesComponent, DialogData} from '../html-templates.component';
+import { HtmlTemplatesComponent, DialogData } from '../html-templates.component';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { ColorEvent } from 'ngx-color';
 
 
 
@@ -10,12 +12,25 @@ import { HtmlTemplatesComponent, DialogData} from '../html-templates.component';
   styleUrls: ['./edit-template-dialog.component.scss']
 })
 export class EditTemplateDialogComponent implements OnInit {
+  @ViewChild('paletteMenuTrigger') menu: MatMenuTrigger;
 
   constructor(
     public dialogRef: MatDialogRef<HtmlTemplatesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
+  }
+
+  addColor() {
+    this.data.colorPallete.push({ name: 'New', hex: '#fff' });
+  }
+
+  removeColor(i) {
+    this.data.colorPallete.splice(i, 1)
+  }
+
+  handleChange($event: ColorEvent, i) {
+    this.data.colorPallete[i].hex = $event.color.hex;
   }
 
 }

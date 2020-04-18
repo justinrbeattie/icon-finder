@@ -30,7 +30,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/@crestron/ch5-crcomlib/build_bundles/umd/cr-com-lib.js"
             ]
           },
           "configurations": {
@@ -88,7 +87,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/@crestron/ch5-crcomlib/build_bundles/umd/cr-com-lib.js"
             ],
             "assets": [
               "src/favicon.ico",

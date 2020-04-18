@@ -1,0 +1,42 @@
+  <grid [cols]="3" [colTemplate]="'1fr'">
+    <cell>
+      <mat-form-field floatLabel="always">
+        <mat-label>Search For Icons</mat-label>
+        <input matInput [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()" (keydown)="clearTimeout()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </cell>
+  </grid>
+
+  <grid class="icon-grid" [cols]="255">
+    <ng-container *ngFor="let font of data.iconFonts; let fontIndex = index;">
+      <cell class="font-heading" [position]="{ x: 1, size: '255X1'}">
+        <h4>{{font.title | titlecase}}</h4>
+      </cell>
+      <ng-container *ngFor="let icon of font.filteredIcons; let iconIndex = index;">
+        <cell class="icon" (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
+           <!--  <h3>{{icon.title | titlecase}}</h3> -->
+              <span [ngStyle]="{'font-family': font.name}" [innerHTML]="icon.unicode"></span>
+          </cell>
+      </ng-container>
+
+    </ng-container>
+  </grid> 
+
+
+<!--   <div class="vertical-viewport">
+    <ng-container *ngFor="let font of data.iconFonts; let fontIndex = index;">
+      <div class="icon-font" *ngIf="font.filteredIcons.length > 0">
+        <h2>{{font.title | titlecase}}</h2>
+        <div class="horizontal-viewport">
+          <div *ngFor="let icon of font.filteredIcons; let iconIndex = index;" class="icon"
+            (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
+            <h3>{{icon.title | titlecase}}</h3>
+            <div class="character" [ngStyle]="{'font-family': font.name}">
+              <span [innerHTML]="icon.unicode"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>  -->

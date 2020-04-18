@@ -1,10 +1,4 @@
 :host {
-  min-height: calc(100% - 28px);
-
-  .wrapper {
-    height: 100%;
-  }
-
 
   font>* {
     font-size: var(--label-font-size);
@@ -16,18 +10,16 @@
     line-height: var(--icon-font-size);
     transform: none;
   }
+}
 
+:host-context(mat-dialog-content) {
+  display: block;
 
-  :host-context(mat-dialog-content) {
-    display: block;
-    .wrapper {
-      padding-top: 25%;
-    }
-
-    .wrapper>p {
-      transform: translateY(-50%);
-    }
+  .wrapper {
+    padding-top: 25%;
   }
 
-
+  .wrapper>p {
+    transform: translateY(-50%);
+  }
 }

@@ -5,11 +5,13 @@
 
 
   .horizontal-viewport {
-    height: 256px;
+    height: calc(256px + (var(--gap-200) * 2));
     width: calc(100vw - 16px);
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
+    padding-top: var(--gap-200);
+    padding-bottom: var(--gap-200);
 
     .template {
       width: 256px;
@@ -17,18 +19,40 @@
       height: 256px;
       padding: var(--gap);
       position: relative;
-      overflow: hidden;
       background: rgba(255, 255, 255, 0.13);
       margin-right: var(--gap);
+
 
       &.selected {
         background-color: rgb(0, 233, 182);
         color: rgba(0, 0, 0, 0.8);
       }
 
+      &.remove-templates-mode {
+        background-color: rgb(255, 167, 167);
+        color: rgba(0, 0, 0, 0.8);
+      }
 
+      .template-heading {
+        position: relative;
+        margin-top: calc(-1 * var(--gap));
+        margin-left: calc(-1 * var(--gap));
+        padding: var(--gap);
+        width: calc(100% + (var(--gap) * 2));
+      }
+
+      app-html-template {
+        width: 100%;
+        height: calc(100% - (40px + (var(--gap) * 2)));
+        overflow: hidden;
+      }
+
+      .remove {
+        position: absolute;
+        right: -12px;
+        top: -12px;
+        background: radial-gradient(#fff 0%, #fff 50%, transparent 51%);
+      }
     }
   }
-
-
 }

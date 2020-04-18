@@ -1,34 +1,6 @@
 <mat-toolbar>
-  <span>Icon Finder</span>
-    <mat-form-field floatLabel="never" appearance="standard">
-        <input matInput [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()"
-        (keydown)="clearTimeout()">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+  <span>Button Creator</span>
 </mat-toolbar>
 
-<grid cols="1">
+    <app-html-templates [iconFonts]="iconFonts"></app-html-templates>
 
-  <cell>
-    <app-html-templates [font]="font" [iconContent]="iconContent"></app-html-templates>
-  </cell>
-
-  <cell>
-    <div class="vertical-viewport">
-      <ng-container *ngFor="let font of iconFonts; let fontIndex = index;">
-        <div class="icon-font" *ngIf="font.filteredIcons.length > 0">
-          <h2>{{font.title | titlecase}}</h2>
-          <div class="horizontal-viewport">
-            <div *ngFor="let icon of font.filteredIcons; let iconIndex = index;" class="icon"
-              (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
-              <h3>{{icon.title | titlecase}}</h3>
-              <div class="character" [ngStyle]="{'font-family': font.name}">
-                <span [innerHTML]="icon.unicode"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </cell>
-</grid>
