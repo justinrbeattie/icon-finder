@@ -11,7 +11,7 @@ Usage:
 @font-face {
   font-family: 'Inter';
   font-weight: 100 900;
-  font-display: swap;
+  font-display: auto;
   font-style: normal;
   font-named-instance: 'Regular';
   src: url("./assets/fonts/Inter.var.woff2?v=3.12") format("woff2");
@@ -19,8 +19,26 @@ Usage:
 @font-face {
   font-family: 'Inter';
   font-weight: 100 900;
-  font-display: swap;
+  font-display: auto;
   font-style: italic;
   font-named-instance: 'Italic';
   src: url("./assets/fonts/Inter-italic.var.woff2?v=3.12") format("woff2");
+}
+
+@font-face {
+  font-family: 'Icons-text-bold';
+  src:
+    url('./assets/fonts/Icons-text-bold.ttf?3z8ye5') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: 'Icons-text-regular';
+  src:
+    url('./assets/fonts/Icons-text-regular.ttf?3z8ye5') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: auto;
 }

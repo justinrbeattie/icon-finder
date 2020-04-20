@@ -59,6 +59,14 @@ body {
   line-height: var(--toggle-group-height,22px);
 }
 
+.mat-dialog-container {
+padding:0;
+}
+
+.mat-tab-body-content {
+overflow:hidden;
+}
+
 
 }
 

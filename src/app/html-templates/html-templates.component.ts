@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 import { EditTemplateDialogComponent } from './edit-template-dialog/edit-template-dialog.component';
 import { HtmlTemplateComponent } from './html-template/html-template.component';
+import { Clipboard } from '@angular/cdk/clipboard'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   currentTemplate: HtmlTemplate;
@@ -30,10 +32,10 @@ export interface StoredData {
   templateUrl: './html-templates.component.html',
   styleUrls: ['./html-templates.component.scss']
 })
-export class HtmlTemplatesComponent implements OnInit, OnChanges {
+export class HtmlTemplatesComponent implements OnInit {
   @Input() iconFonts;
-  defaultHtmlTemplate: HtmlTemplate = { name: 'Example Template', icon: { font: '', content: '', size: '96', color: 'red', alignment: 'center' }, label: { font: 'Inter', content: 'Label', size: '28', color: 'green', weight: 'bold', alignment: 'center', position: 'top' }, html: null, };
-  defaultColorSwatch: ColorSwatch = { name: '', hex: '#fff' };
+  defaultHtmlTemplate: HtmlTemplate = { name: 'Example Template', icon: { font: '', content: '', size: '96', color: '#ffffff', alignment: 'center' }, label: { font: 'Icons-text-bold', content: 'Label', size: '28', color: '#ffffff', weight: 'bold', alignment: 'center', position: 'top' }, html: null, };
+  defaultColorSwatch: ColorSwatch = { name: 'New Color', hex: '#ffffff' };
 
   storedData: StoredData = {
     htmlTemplates: [this.defaultHtmlTemplate],
@@ -41,17 +43,18 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
   }
   removeTemplatesMode: boolean = false;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private clipboard: Clipboard, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("storedData")) {
       this.storedData = this.parseData(localStorage.getItem("storedData"));
     }
-    /* this.setIcon(); */
   }
 
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-  /*   this.setIcon(); */
+  openAlert(message: string, action?: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   parseData(data) {
@@ -59,20 +62,10 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
     if (storedData.htmlTemplates && storedData.colorPallete) {
       return storedData;
     } else {
-      alert('Invalid Data');
+      this.openAlert('Invalid Data');
       return this.storedData;
     }
   }
-
-/*   setIcon() {
-    if (this.storedData.htmlTemplates) {
-      this.storedData.htmlTemplates.map(template => {
-        template.icon.font = this.font;
-        const iconDecimal = parseInt(this.iconContent.substring(3).replace(';', ''), 16);
-        template.icon.content = '&#' + iconDecimal + ';';
-      });
-    }
-  } */
 
   editTemplate(i): void {
 
@@ -86,7 +79,7 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(EditTemplateDialogComponent, {
       height: '80vh',
       width: '80vw',
-      data: { currentTemplate: currentTemplate, colorPallete: this.storedData.colorPallete, iconFonts:this.iconFonts }
+      data: { currentTemplate: currentTemplate, colorPallete: this.storedData.colorPallete, iconFonts: this.iconFonts }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,15 +92,17 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
   }
 
   copyTemplateHtml(component: HtmlTemplateComponent, templateIndex) {
-
     const html = component.generatedHtml.nativeElement.parentElement.cloneNode(true);
     const iconUnicode = this.storedData.htmlTemplates[templateIndex].icon.content;
     this.createExportableHtml(html, iconUnicode);
-    console.log(html.children[0].innerHTML.toString().replace('&amp;','&'));
+    const htmlString: string = html.children[0].innerHTML.toString().replace('&amp;', '&');
+    this.clipboard.copy(htmlString);
+    console.log(htmlString);
+    this.openAlert('Template Copied to Clipboard')
   }
 
-  createExportableHtml(node, iconUnicode) {
-    const nodeIterator = document.createNodeIterator(
+  createExportableHtml(node: Node, iconUnicode: string) {
+    const nodeIterator: NodeIterator = document.createNodeIterator(
       node,
       NodeFilter.SHOW_ALL,
       { acceptNode: function (node) { return NodeFilter.FILTER_ACCEPT; } }
@@ -124,8 +119,8 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
             if (attr.name.includes('_ng')) { node.removeAttribute(attr.name) };
           };
         }
-        if (node.innerText == "" && node.children.length === 0) {
-          node.innerText = iconUnicode;
+        if (node.children == undefined && node.length == 1) {
+            node.nodeValue = iconUnicode;
         }
       }
     }
@@ -151,14 +146,13 @@ export class HtmlTemplatesComponent implements OnInit, OnChanges {
         const result: any = fileReader.result;
         this.storedData = this.parseData(result);
         localStorage.setItem("storedData", JSON.stringify(this.storedData));
-    /*     this.setIcon(); */
-        alert('Template Upload Complete');
+        this.openAlert('Template Upload Complete');
       }
       fileReader.onerror = (error) => {
         console.log(error);
       }
     } else {
-      alert('no file selected');
+      this.openAlert('no file selected');
     }
   }
 

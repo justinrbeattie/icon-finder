@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import {DialogData} from '../html-templates/html-templates.component'
 
 @Component({
   selector: 'app-icon-finder',
   templateUrl: './icon-finder.component.html',
-  styleUrls: ['./icon-finder.component.scss']
+  styleUrls: ['./icon-finder.component.scss'],
+  encapsulation:ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconFinderComponent implements OnInit {
   @Input() data:DialogData;
@@ -16,6 +18,7 @@ export class IconFinderComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearch() {
+    console.log('type');
     window.clearTimeout(this.isTyping);
 
     this.isTyping = setTimeout(() => {
@@ -46,7 +49,9 @@ export class IconFinderComponent implements OnInit {
     this.data.iconFonts[fontIndex].filteredIcons[iconIndex].selected = true;
 
     this.data.currentTemplate.icon.font = this.data.iconFonts[fontIndex].name;
-    this.data.currentTemplate.icon.content = this.data.iconFonts[fontIndex].filteredIcons[iconIndex].unicode;
+    const iconHex = this.data.iconFonts[fontIndex].filteredIcons[iconIndex].unicode;
+    const iconDecimal = parseInt(iconHex.substring(3).replace(';', ''), 16);
+    this.data.currentTemplate.icon.content = '&#' + iconDecimal + ';';
 
   }
 }

@@ -7,36 +7,22 @@
       </mat-form-field>
     </cell>
   </grid>
-
-  <grid class="icon-grid" [cols]="255">
-    <ng-container *ngFor="let font of data.iconFonts; let fontIndex = index;">
-      <cell class="font-heading" [position]="{ x: 1, size: '255X1'}">
-        <h4>{{font.title | titlecase}}</h4>
-      </cell>
-      <ng-container *ngFor="let icon of font.filteredIcons; let iconIndex = index;">
-        <cell class="icon" (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
-           <!--  <h3>{{icon.title | titlecase}}</h3> -->
-              <span [ngStyle]="{'font-family': font.name}" [innerHTML]="icon.unicode"></span>
-          </cell>
-      </ng-container>
-
-    </ng-container>
-  </grid> 
-
-
-<!--   <div class="vertical-viewport">
-    <ng-container *ngFor="let font of data.iconFonts; let fontIndex = index;">
-      <div class="icon-font" *ngIf="font.filteredIcons.length > 0">
-        <h2>{{font.title | titlecase}}</h2>
-        <div class="horizontal-viewport">
-          <div *ngFor="let icon of font.filteredIcons; let iconIndex = index;" class="icon"
-            (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
-            <h3>{{icon.title | titlecase}}</h3>
-            <div class="character" [ngStyle]="{'font-family': font.name}">
-              <span [innerHTML]="icon.unicode"></span>
-            </div>
+  <div class="pl-100 py-100">
+    <cdk-virtual-scroll-viewport itemSize="96" [minBufferPx]="browse?1024:9000" [maxBufferPx]="browse?2048:9000">
+      <ng-container *cdkVirtualFor="let font of data.iconFonts; let fontIndex = index;">
+        <div class="font" *ngIf="font.filteredIcons.length > 0">
+          <div class="font-heading">
+            <h4>{{font.title | titlecase}}</h4>
+          </div>
+          <div class="icon-grid">
+            <ng-container *ngFor="let icon of font.filteredIcons; let iconIndex = index;">
+              <div class="icon" content-alignment="center middle" (click)="selectIcon(fontIndex,iconIndex)" [class.selected]="icon.selected">
+                <!--  <h3>{{icon.title | titlecase}}</h3> -->
+                <span [ngStyle]="{'font-family': font.name}" [innerHTML]="icon.unicode"></span>
+              </div>
+            </ng-container>
           </div>
         </div>
-      </div>
-    </ng-container>
-  </div>  -->
+      </ng-container>
+    </cdk-virtual-scroll-viewport>
+  </div>

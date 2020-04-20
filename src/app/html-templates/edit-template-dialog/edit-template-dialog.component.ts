@@ -22,7 +22,7 @@ export class EditTemplateDialogComponent implements OnInit {
   }
 
   addColor() {
-    this.data.colorPallete.push({ name: 'New', hex: '#fff' });
+    this.data.colorPallete.push({ name: 'New', hex: '#ffffff' });
   }
 
   removeColor(i) {
@@ -30,6 +30,7 @@ export class EditTemplateDialogComponent implements OnInit {
   }
 
   handleChange($event: ColorEvent, i) {
+    console.log($event);
     this.data.colorPallete[i].hex = $event.color.hex;
   }
 

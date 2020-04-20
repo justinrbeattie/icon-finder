@@ -1,83 +1,59 @@
-:host {
+app-icon-finder {
 
   mat-form-field {
     width: 100%;
     margin-bottom: -4px;
   }
 
-  .icon-grid {
-
+  cdk-virtual-scroll-viewport {
     width: 100%;
-    height: calc(100% - 80px);
-    overflow: scroll;
-    position: relative;
-
-
-    .font-heading {
-        position: sticky;
-        top: calc(-1 * var(--gap));
-        left: calc(-1 * var(--gap));
-        max-width: 80vw;
-        background:#393939;
-        z-index: 10;
-    }
-
-    .icon {
-      width: 64px;
-      height: 64px;
-      line-height: 64px;
-      font-size: 48px;
-
-    }
-
+    height: calc(80vh - 178px);
   }
 
+  .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: column;
 
-  .vertical-viewport {
-    height: 100%;
-    width: 100%;
-    overflow: scroll;
-
-    .icon-font {
-      height: 320px;
-
-      .horizontal-viewport {
-        height: 256px;
+    .font {
+      height:96px;
+      .font-heading {
+        position: sticky;
+        top: 0;
+        left: 0;
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        overflow: visible;
+        max-width: 80vw;
+        z-index: 10;
+        pointer-events: none;
+
+        h4 {
+          width: 100%;
+          line-height: 32px;
+          height: 32px;
+          background: hsl(0, 0%, 22%);
+        }
+      }
+
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(255, 64px);
+        grid-template-rows: 64px;
 
         .icon {
-          width: 256px;
-          min-width: 256px;
-          height: 256px;
-          padding: var(--gap);
-          position: relative;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.13);
-          margin-right: var(--gap);
+          width: 64px;
+          height: 64px;
+          line-height: 64px;
+          font-size: 48px;
 
           &.selected {
             background-color: rgb(0, 233, 182);
             color: rgba(0, 0, 0, 0.8);
           }
 
-          .character {
-            width: 100%;
-            height: calc(100% - 28px);
-            text-align: center;
-            font-size: 128px;
-            line-height: 128px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
+
         }
       }
 
     }
-  }
 
+  }
 }

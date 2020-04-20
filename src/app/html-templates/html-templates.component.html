@@ -1,8 +1,7 @@
-<grid [colTemplate]="'1fr auto'">
-  <cell content-alignment="left middle">
-    <h2>Templates</h2>
-  </cell>
-  <cell content-alignment="center middle">
+
+<mat-toolbar content-alignment="space-between-h middle">
+  <span>Button Creator</span>
+  <div content-alignment="center middle">
     <button mat-button color="primary" class="mr-100" (click)="export()"
       [disabled]="removeTemplatesMode">Export</button>
     <button mat-button color="primary" class="mr-100" (click)="uploader.click()"
@@ -13,11 +12,12 @@
       (click)="removeTemplatesMode = !removeTemplatesMode">Remove</button>
     <button mat-raised-button color="primary" (click)="addTemplate()" [disabled]="removeTemplatesMode">Add</button>
     <input hidden type="file" #uploader (change)="import($event)" accept="application/JSON" />
-  </cell>
-</grid>
+  </div>
+</mat-toolbar>
 
-<div class="horizontal-viewport">
-  <div *ngFor="let template of storedData.htmlTemplates; let i = index;" class="template">
+
+<grid [cols]="6" [colTemplate]="'1fr'" [rowTemplate]="'256px'">
+  <cell *ngFor="let template of storedData.htmlTemplates; let i = index;" class="template">
     <div class="template-heading" content-alignment="space-between midddle">
       <h3>{{template.name}} </h3>
       <div class="template-actions">
@@ -31,5 +31,5 @@
     </div>
     <app-html-template #htmlTemplateComponent content-alignment="center middle" [template]="template"></app-html-template>
     <mat-icon (click)="removeTemplate(i)" *ngIf="removeTemplatesMode" class="remove" color="warn">cancel</mat-icon>
-  </div>
-</div>
+  </cell>
+</grid>

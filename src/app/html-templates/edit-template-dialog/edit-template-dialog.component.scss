@@ -4,13 +4,21 @@
   }
 
   mat-dialog-content {
-    max-height: calc(80vh - 92px);
+    max-height: calc(80vh - 52px);
     height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .template-wrapper {
+    height: calc(80vh - 352.5px);
   }
 
   mat-dialog-content app-html-template {
-    height: calc(100% - 256px);
-    min-height: calc(100% - 256px);
+    display: block;
+    width: 512px;
+    max-height: 512px;
+    margin: auto;
   }
 
   mat-form-field {
@@ -19,43 +27,46 @@
   }
 
   mat-form-field mat-slider {
-    width: calc(100% + calc(var(--gap) * 2));
+    width: 100%;
     position: absolute;
-    left: calc(var(--gap) * -1);
-    top: calc(var(--gap) - 1px);
+    left: 0;
     z-index: 1;
   }
 
   mat-tab-group {
-      width:100%;
-      height:100%;
+    width: 100%;
+    height: 100%;
   }
 
-
   .color-pallete {
-    --gap: var(--gap-200);
-    width: 100%;
-    height: 64px;
+    max-width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 64px;
+    gap: var(--gap);
     padding: var(--gap);
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
+    overflow: hidden;
+    gap: var(--gap);
+    padding: var(--gap);
 
     >* {
-      width: 64px;
+      width: 100%;
       height: 64px;
-      padding: var(--gap);
       position: relative;
       margin-right: var(--gap);
+
+      span {
+        filter: invert(1);
+        font-size: 75%;
+        font-weight: bold;
+      }
 
       .remove {
         position: absolute;
         right: -12px;
         top: -12px;
-        background: radial-gradient(#fff 0%,#fff 50%, transparent 51%);
+        background: radial-gradient(#fff 0%, #fff 50%, transparent 51%);
       }
     }
   }
 }
-
-

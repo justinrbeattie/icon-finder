@@ -1,5 +1,8 @@
 <mat-dialog-content class="mat-typography">
   <mat-tab-group>
+    <mat-tab label="Choose Icon">
+      <app-icon-finder [data]="data"></app-icon-finder>
+    </mat-tab>
     <mat-tab label="Edit Template">
       <grid [cols]="3" [colTemplate]="'1fr'">
         <cell>
@@ -49,7 +52,12 @@
             <mat-label>Icon Color</mat-label>
             <mat-select [(ngModel)]="data.currentTemplate.icon.color">
               <mat-option *ngFor="let color of data.colorPallete" [value]="color.hex">
-                {{color.hex}}
+                <style>  .color-option > div {
+                  width:32px;
+                  height:32px;
+                  border-radius: 32px;
+                }</style>
+                <div class="color-option" content-alignment="left middle"><div class="mr-100" [style.background-color]="color.hex"></div> {{color.name}} - {{color.hex}}</div>
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -89,7 +97,12 @@
             <mat-select [(ngModel)]="data.currentTemplate.label.color"
               [disabled]="data.currentTemplate.label.content.length == 0">
               <mat-option *ngFor="let color of data.colorPallete" [value]="color.hex">
-                {{color.hex}}
+                <style>  .color-option > div {
+                  width:32px;
+                  height:32px;
+                  border-radius: 32px;
+                }</style>
+                <div class="color-option" content-alignment="left middle"><div class="mr-100" [style.background-color]="color.hex"></div> {{color.name}} - {{color.hex}}</div>
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -114,20 +127,20 @@
           </ng-container>
         </cell>
       </grid>
-      <app-html-template [template]="data.currentTemplate"></app-html-template>
-    </mat-tab>
-    <mat-tab label="Choose Icon">
-            <app-icon-finder [data]="data"></app-icon-finder>
+      <div class="template-wrapper" content-alignment="center middle">
+        <app-html-template [template]="data.currentTemplate"></app-html-template>
+      </div>
     </mat-tab>
     <mat-tab label="Edit Global Color Pallete">
 
       <div class="color-pallete">
         <div *ngFor="let color of data.colorPallete; let i = index" [style.backgroundColor]="color.hex"
-          [matMenuTriggerFor]="colorPicker" #paletteMenuTrigger>
+          [matMenuTriggerFor]="colorPicker" #paletteMenuTrigger content-alignment="center middle">
+          <span [style.color]="color.hex">{{color.name}}</span>
           <mat-icon (click)="removeColor(i)" class="remove" color="warn">cancel</mat-icon>
           <mat-menu #colorPicker="matMenu">
             <style>
-              color-sketch {
+            #color-picker color-sketch {
                 width: 280px;
                 height: 355px;
                 margin-top: -8px;
@@ -136,15 +149,29 @@
                 display: block;
               }
 
+              #color-picker input {
+                margin-top: -16px;
+                position: absolute;
+                width: 280px;
+                border: none;
+                height: 26px;
+                line-height: 26px;
+                z-index: 10;
+                padding: 4px;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+              }
+
             </style>
 
-            <div (click)="$event.stopPropagation()">
+            <div id="color-picker" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="color.name">
               <color-sketch color="#fff" (onChangeComplete)="handleChange($event,i)"></color-sketch>
             </div>
           </mat-menu>
         </div>
 
-        <div content-align="center middle">
+        <div content-alignment="center middle">
           <button (click)="addColor()" mat-icon-button>
             <mat-icon>add</mat-icon>
           </button>
