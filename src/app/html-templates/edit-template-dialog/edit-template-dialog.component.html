@@ -15,6 +15,9 @@
           <mat-form-field floatLabel="always">
             <mat-label>Label</mat-label>
             <input matInput placeholder="Name" [(ngModel)]="data.currentTemplate.label.content">
+            <button matSuffix mat-icon-button [class.active]="data.currentTemplate.label.weight == 'bold'" (click)="data.currentTemplate.label.weight = (data.currentTemplate.label.weight == 'bold'? 'normal' : 'bold' )" >
+              <mat-icon>format_bold</mat-icon>
+            </button>
           </mat-form-field>
         </cell>
         <cell>
@@ -108,7 +111,6 @@
           </mat-form-field>
         </cell>
         <cell>
-          <ng-container>
             <mat-form-field floatLabel="always">
               <mat-label>Label Alignment</mat-label>
               <mat-select [(ngModel)]="data.currentTemplate.label.alignment"
@@ -124,7 +126,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </ng-container>
         </cell>
       </grid>
       <div class="template-wrapper" content-alignment="center middle">

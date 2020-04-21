@@ -2,7 +2,7 @@
     <cell>
       <mat-form-field floatLabel="always">
         <mat-label>Search For Icons</mat-label>
-        <input matInput [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()" (keydown)="clearTimeout()">
+        <input matInput [(ngModel)]="searchTerm" #ctrl="ngModel" (keyup)="onSearch()">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </cell>

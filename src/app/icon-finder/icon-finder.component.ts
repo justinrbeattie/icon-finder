@@ -12,16 +12,11 @@ export class IconFinderComponent implements OnInit {
   @Input() data:DialogData;
   searchTerm: string;
   browse: boolean = true;
-  isTyping;
   constructor() { }
 
   ngOnInit(): void {}
 
   onSearch() {
-    console.log('type');
-    window.clearTimeout(this.isTyping);
-
-    this.isTyping = setTimeout(() => {
       if (this.searchTerm.length > 0) {
         this.browse = false;
         this.data.iconFonts.forEach((font, fontIndex) => {
@@ -37,11 +32,6 @@ export class IconFinderComponent implements OnInit {
           font['filteredIcons'] = font.icons;
         });
       }
-    }, 250);
-  }
-
-  clearTimeout() {
-    window.clearTimeout(this.isTyping);
   }
 
   selectIcon(fontIndex: number, iconIndex: number) {

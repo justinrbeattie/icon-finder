@@ -8,10 +8,10 @@
         <P [attr.align]="template.icon.alignment" [innerHTML]="template.icon.content"></P>
       </ng-container>
       <ng-container *ngIf="template.label.position == 'right'">
-       &nbsp; <span [innerHTML]="template.icon.content"></span>
+      <span [innerHTML]="template.icon.content"></span>&nbsp;
       </ng-container>
       <ng-container *ngIf="template.label.position == 'left'">
-        <span [innerHTML]="template.icon.content"></span>  &nbsp;
+        &nbsp;<span [innerHTML]="template.icon.content"></span>
       </ng-container>
     </FONT>
   </ng-template>

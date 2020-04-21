@@ -76454,7 +76454,7 @@
                 "selected": false
             }
         ],
-        "Icons": [
+        "icons": [
             {
                 "name": "about",
                 "title": "about",
@@ -77242,7 +77242,7 @@
                 "selected": false
             }
         ],
-        "Icons": [
+        "icons": [
             {
                 "name": "about",
                 "title": "about",
