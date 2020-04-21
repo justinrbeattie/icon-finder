@@ -26,19 +26,16 @@ Usage:
 }
 
 @font-face {
-  font-family: 'Icons-text-bold';
-  src:
-    url('./assets/fonts/Icons-text-bold.ttf?3z8ye5') format('truetype');
-  font-weight: bold;
+  font-family: 'icons_text';
+  src: url('./assets/fonts/icons_text_Regular.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
-  font-display: auto;
 }
 
 @font-face {
-  font-family: 'Icons-text-regular';
-  src:
-    url('./assets/fonts/Icons-text-regular.ttf?3z8ye5') format('truetype');
-  font-weight: normal;
+  font-family: 'icons_text';
+  src: url('./assets/fonts/icons_text_Bold.ttf') format('truetype');
+  font-weight: bold;
   font-style: normal;
-  font-display: auto;
 }
+

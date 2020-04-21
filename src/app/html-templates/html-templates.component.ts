@@ -34,7 +34,7 @@ export interface StoredData {
 })
 export class HtmlTemplatesComponent implements OnInit {
   @Input() iconFonts;
-  defaultHtmlTemplate: HtmlTemplate = { name: 'Example Template', icon: { font: '', content: '', size: '96', color: '#ffffff', alignment: 'center' }, label: { font: 'Icons-text-bold', content: 'Label', size: '28', color: '#ffffff', weight: 'bold', alignment: 'center', position: 'top' }, html: null, };
+  defaultHtmlTemplate: HtmlTemplate = { name: 'Example Template', icon: { font: '', content: '', size: '96', color: '#ffffff', alignment: 'center' }, label: { font: 'icons_text', content: 'Label', size: '28', color: '#ffffff', weight: 'bold', alignment: 'center', position: 'top' }, html: null, };
   defaultColorSwatch: ColorSwatch = { name: 'New Color', hex: '#ffffff' };
 
   storedData: StoredData = {
