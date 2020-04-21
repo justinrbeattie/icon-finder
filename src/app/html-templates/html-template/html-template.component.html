@@ -7,11 +7,8 @@
       <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'bottom'">
         <P [attr.align]="template.icon.alignment" [innerHTML]="template.icon.content"></P>
       </ng-container>
-      <ng-container *ngIf="template.label.position == 'right'">
-      <span [innerHTML]="template.icon.content"></span>&nbsp;
-      </ng-container>
-      <ng-container *ngIf="template.label.position == 'left'">
-        &nbsp;<span [innerHTML]="template.icon.content"></span>
+      <ng-container *ngIf="template.label.position == 'right' || template.label.position == 'left'">
+      <span [outerHTML]="template.icon.content"></span>
       </ng-container>
     </FONT>
   </ng-template>
@@ -24,7 +21,7 @@
       <ng-template #labelContent>
         <ng-container [ngSwitch]="template.label.weight">
           <b *ngSwitchCase="'bold'" [innerHTML]="template.label.content"></b>
-          <span *ngSwitchDefault [innerHTML]="template.label.content"></span>
+          <span *ngSwitchDefault [outerHTML]="template.label.content"></span>
         </ng-container>
       </ng-template>
       <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'bottom'">
@@ -33,10 +30,12 @@
         </P>
       </ng-container>
 
-      <ng-container *ngIf="template.label.position == 'right' || template.label.position == 'left'">
-        <span>
-          <ng-container *ngTemplateOutlet="labelContent"></ng-container>
-        </span>
+      <ng-container *ngIf="template.label.position == 'right'">
+          &nbsp;<ng-container *ngTemplateOutlet="labelContent"></ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="template.label.position == 'left'">
+          <ng-container *ngTemplateOutlet="labelContent"></ng-container>&nbsp;
       </ng-container>
     </FONT>
   </ng-template>

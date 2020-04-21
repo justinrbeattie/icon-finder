@@ -1,13 +1,13 @@
 :host {
-
+  transform: scale(.7);
 
   font[face*="icons"]>* {
     font-size: var(--icon-font-size);
-    line-height: var(--icon-font-size);
+    line-height: 1.25;
   }
 
   font[face*="icons_text"]>* {
     font-size: var(--label-font-size);
-    line-height: var(--label-font-size);
+    line-height: 1.25;
   }
 }
