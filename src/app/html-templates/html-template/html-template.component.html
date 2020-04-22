@@ -1,53 +1,31 @@
-<div class="wrapper"
-    [ngClass]="template.label.position"
+<div class="wrapper" [ngClass]="template.label.position"
   [style]="'--icon-font-size:' + template.icon.size + 'pt;' + '--label-font-size:' +  template.label.size + 'pt;'">
 
   <ng-template #icon>
     <FONT [attr.size]="template.icon.size" [attr.color]="template.icon.color" [attr.face]="template.icon.font">
-      <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'bottom'">
-        <P [attr.align]="template.icon.alignment" [innerHTML]="template.icon.content"></P>
-      </ng-container>
-      <ng-container *ngIf="template.label.position == 'right' || template.label.position == 'left'">
+      <br *ngIf="template.label.position == 'top'">
+      {{template.label.position == 'left' ? ' ':'' }}
       <span [outerHTML]="template.icon.content"></span>
-      </ng-container>
+      {{template.label.position == 'right' ? ' ':'' }}
+      <br *ngIf="template.label.position == 'bottom'">
     </FONT>
   </ng-template>
 
   <ng-template #label>
-    <FONT *ngIf="template.label.content.length > 0"
-      [attr.size]="template.label.size"
+    <FONT *ngIf="template.label.content.length > 0" [attr.size]="template.label.size"
       [attr.color]="template.label.color" [attr.face]="template.label.font">
-
-      <ng-template #labelContent>
-        <ng-container [ngSwitch]="template.label.weight">
-          <b *ngSwitchCase="'bold'" [innerHTML]="template.label.content"></b>
-          <span *ngSwitchDefault [outerHTML]="template.label.content"></span>
-        </ng-container>
-      </ng-template>
-      <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'bottom'">
-        <P [attr.align]="template.label.alignment">
-          <ng-container *ngTemplateOutlet="labelContent"></ng-container>
-        </P>
-      </ng-container>
-
-      <ng-container *ngIf="template.label.position == 'right'">
-          &nbsp;<ng-container *ngTemplateOutlet="labelContent"></ng-container>
-      </ng-container>
-
-      <ng-container *ngIf="template.label.position == 'left'">
-          <ng-container *ngTemplateOutlet="labelContent"></ng-container>&nbsp;
-      </ng-container>
+      <b *ngIf="template.label.weight == 'bold'"><span [outerHTML]="template.label.content"></span> </b>
+      <span *ngIf="template.label.weight == 'normal'" [outerHTML]="template.label.content"></span>
     </FONT>
   </ng-template>
-  <p #generatedHtml [attr.align]="template.icon.alignment">
-    <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'left'">
-      <ng-container *ngTemplateOutlet="label"></ng-container>
-      <ng-container *ngTemplateOutlet="icon"></ng-container>
-    </ng-container>
 
-    <ng-container *ngIf="template.label.position == 'bottom' || template.label.position == 'right'">
-      <ng-container *ngTemplateOutlet="icon"></ng-container>
-      <ng-container *ngTemplateOutlet="label"></ng-container>
-    </ng-container>
-  </p>
+  <ng-container *ngIf="template.label.position == 'top' || template.label.position == 'left'">
+    <ng-container *ngTemplateOutlet="label"></ng-container>
+    <ng-container *ngTemplateOutlet="icon"></ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="template.label.position == 'bottom' || template.label.position == 'right'">
+    <ng-container *ngTemplateOutlet="icon"></ng-container>
+    <ng-container *ngTemplateOutlet="label"></ng-container>
+  </ng-container>
 </div>
