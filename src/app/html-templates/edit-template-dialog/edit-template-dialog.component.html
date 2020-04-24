@@ -23,7 +23,7 @@
         <cell>
           <mat-form-field floatLabel="always">
             <mat-label>Label Position</mat-label>
-            <mat-select [(ngModel)]="data.currentTemplate.label.position">
+            <mat-select [(ngModel)]="data.currentTemplate.label.position" (ngModelChange)="changeFont()">
               <mat-option value="left">
                 Left
               </mat-option>

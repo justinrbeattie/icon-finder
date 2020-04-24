@@ -1,12 +1,11 @@
 <div class="wrapper" [ngClass]="template.label.position"
-  [style]="'--icon-font-size:' + template.icon.size + 'pt;' + '--label-font-size:' +  template.label.size + 'pt;'">
+  [style]="'--icon-font-size:' + template.icon.size + 'pt;' + '--label-font-size:' +  template.label.size + 'pt;'"
+  #generatedHtml>
 
   <ng-template #icon>
     <FONT [attr.size]="template.icon.size" [attr.color]="template.icon.color" [attr.face]="template.icon.font">
       <br *ngIf="template.label.position == 'top'">
-      {{template.label.position == 'left' ? ' ':'' }}
       <span [outerHTML]="template.icon.content"></span>
-      {{template.label.position == 'right' ? ' ':'' }}
       <br *ngIf="template.label.position == 'bottom'">
     </FONT>
   </ng-template>
@@ -14,8 +13,10 @@
   <ng-template #label>
     <FONT *ngIf="template.label.content.length > 0" [attr.size]="template.label.size"
       [attr.color]="template.label.color" [attr.face]="template.label.font">
+      {{template.label.position == 'left' ? ' ':'' }}
       <b *ngIf="template.label.weight == 'bold'"><span [outerHTML]="template.label.content"></span> </b>
       <span *ngIf="template.label.weight == 'normal'" [outerHTML]="template.label.content"></span>
+      {{template.label.position == 'right' ? ' ':'' }}
     </FONT>
   </ng-template>
 

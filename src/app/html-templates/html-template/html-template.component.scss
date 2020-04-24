@@ -10,7 +10,7 @@
     line-height: 1.25;
   }
 
-  font[face*="icons_text"] {
+  font[face="icons_text"], font[face="Inter"] {
     font-size: var(--label-font-size);
     line-height: 1.25;
   }
